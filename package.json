@@ -1,0 +1,31 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luompham/nodejs_blog2.git"
+  },
+  "keywords": [
+    "f8",
+    "blg",
+    "nodejs"
+  ],
+  "author": "Ivan Pham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luompham/nodejs_blog2/issues"
+  },
+  "homepage": "https://github.com/luompham/nodejs_blog2#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
