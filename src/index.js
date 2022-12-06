@@ -6,14 +6,16 @@ const port = 3000;
 const { engine } = require('express-handlebars');
 const route = require('./routes/index');
 
-app.engine('hbs', engine({
-    extname: '.hbs',
-}),
+app.engine(
+    'hbs',
+    engine({
+        extname: '.hbs',
+    }),
 );
 app.set("view engine", '.hbs');
-app.set("views", './src/resources/views');
+app.set('views', './src/resources/views');
 
-app.use(morgan("combined"));
+app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
