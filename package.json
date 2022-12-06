@@ -1,35 +1,47 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/luompham/nodejs_blog2.git"
-  },
-  "keywords": [
-    "f8",
-    "blg",
-    "nodejs"
-  ],
-  "author": "Ivan Pham",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/luompham/nodejs_blog2/issues"
-  },
-  "homepage": "https://github.com/luompham/nodejs_blog2#readme",
-  "dependencies": {
-    "express": "^4.18.2",
-    "express-handlebars": "^6.0.6"
-  },
-  "devDependencies": {
-    "morgan": "^1.10.0",
-    "node-sass": "^8.0.0",
-    "nodemon": "^2.0.20"
-  }
+	"name": "blog",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/index.js",
+	"scripts": {
+		"beautiful": "lint-staged",
+		"start": "nodemon --inspect src/index.js",
+		"watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/luompham/nodejs_blog2.git"
+	},
+	"keywords": [
+		"f8",
+		"blg",
+		"nodejs"
+	],
+	"author": "Ivan Pham",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/luompham/nodejs_blog2/issues"
+	},
+	"homepage": "https://github.com/luompham/nodejs_blog2#readme",
+	"lint-staged": {
+		"\"src/**/*.{js,json,scss}\"": "prettier --single-quote --trailing-comma all --write"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"dependencies": {
+		"express": "^4.18.2",
+		"express-handlebars": "^6.0.6"
+	},
+	"devDependencies": {
+		"husky": "^4.2.5",
+		"lint-staged": "^13.0.4",
+		"morgan": "^1.10.0",
+		"node-sass": "^8.0.0",
+		"nodemon": "^2.0.20",
+		"prettier": "^2.8.0"
+	}
 }
