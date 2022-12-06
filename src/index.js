@@ -13,7 +13,7 @@ app.engine(
     }),
 );
 app.set("view engine", '.hbs');
-app.set('views', './src/resources/views');
+app.set("views", './src/resources/views');
 
 app.use(morgan('combined'));
 
