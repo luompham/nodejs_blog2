@@ -25,7 +25,7 @@
 	},
 	"homepage": "https://github.com/luompham/nodejs_blog2#readme",
 	"lint-staged": {
-		"\"src/**/*.{js,json,scss}\"": "prettier --single-quote --trailing-comma all --write"
+		"src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --write"
 	},
 	"husky": {
 		"hooks": {
