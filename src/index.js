@@ -15,7 +15,7 @@ app.engine(
 app.set("view engine", '.hbs');
 app.set("views", './src/resources/views');
 
-app.use(morgan('combined'));
+app.use(morgan("combined"));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
