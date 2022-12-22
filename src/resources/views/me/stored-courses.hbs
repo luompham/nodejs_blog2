@@ -1,4 +1,4 @@
-<div class="mt-4">
+<form name="container-form[]" method="POST" action="/courses/handle-form-actions" class="mt-4">
     <div class="container">
         <div>
             <h3>Khóa học của tôi</h3>
@@ -6,16 +6,17 @@
 
             <div class="mt-4 d-flex align-items-center pl-12">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Chọn tất cả</label>
+                    <input type="checkbox" class="form-check-input" id="checkbox-all">
+                    <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
                 </div>
 
-                <select class="custom-select my-1 mr-sm-2 checkbox-select-all-option" id="inlineFormCustomSelectPref">
-                    <option selected>-- Hành động --</option>
-                    <option value="1">Xóa</option>
+                <select name="action" class="custom-select my-1 mr-sm-2 checkbox-select-all-option" required="required">
+                    <option value="">-- Hành động --</option>
+                    <option value="delete">Xóa</option>
 
                 </select>
-                <button type="button" class="btn btn-primary disabled" data-dismiss="modal">Thực hiện</button>
+                <button type="submit" class="btn check-all-submit-btn btn-primary" data-dismiss="modal"
+                    disabled="disabled">Thực hiện</button>
 
             </div>
 
@@ -26,9 +27,16 @@
                 <tr>
                     <th scope="col">#</th>
                     <th>No</th>
-                    <th scope="col">Tên khóa học</th>
-                    <th scope="col">Trình độ</th>
-                    <th scope="col" colspan="2">Thời gian tạo</th>
+                    <th scope="col">Tên khóa học
+                        {{{sortable 'name' _sort}}}
+                    </th>
+                    <th scope="col">Trình độ
+                        {{{sortable 'level' _sort}}}
+                    </th>
+
+                    <th scope="col" colspan="2">Thời gian tạo
+                        {{{sortable 'createdAt' _sort}}}
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +46,7 @@
                 <tr>
                     <td>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <input type="checkbox" class="form-check-input" name="courseIds[]" value="{{this._id}}">
 
                         </div>
                     </td>
@@ -95,7 +103,7 @@
         </div>
     </div>
 
-</div>
+</form>
 
 {{!-- Delete hidden form --}}
 <form name="delete-course-form" method="POST" action=""></form>
@@ -106,6 +114,13 @@
         let courseId;
         let btnDeleteCourse = $('#btn-delete-course');
         let deleteCourseForm = document.forms['delete-course-form'];
+        let checkboxAllBtn = $('#checkbox-all');
+        let checkboxItem = $('input[name="courseIds[]"]');
+        let checkAllSubmitBtn = $('.check-all-submit-btn');
+        //   let containerForm = document.forms['container-form'];
+        let containerForm = $('form[name="container-form[]"]');
+
+        console.log(containerForm)
 
         //when the confirm dialog clicked
 
@@ -120,7 +135,35 @@
             deleteCourseForm.submit();
         })
 
+        //checkbox all clicked
+        checkboxAllBtn.change(function () {
+            let isCheckedAll = $(this).is(':checked');
+            $(checkboxItem).prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn();
 
+            //console.log(isChecked)
+        })
+
+
+        //checkbox item changed
+        checkboxItem.change(function () {
+            let isCheckedItem = checkboxItem.length === $('input[name="courseIds[]"]:checked').length;
+            $(checkboxAllBtn).prop('checked', isCheckedItem);
+            renderCheckAllSubmitBtn();
+        })
+
+        // Re-render Check all submit button
+        function renderCheckAllSubmitBtn() {
+            let checkedCount = $('input[name="courseIds[]"]:checked').length
+            if (checkedCount > 0) {
+                //  checkAllSubmitBtn.removeClass('disabled');
+                checkAllSubmitBtn.prop('disabled', false);
+
+            } else {
+                // checkAllSubmitBtn.addClass('disabled');
+                checkAllSubmitBtn.prop('disabled', true);
+            }
+        }
 
     })
 
