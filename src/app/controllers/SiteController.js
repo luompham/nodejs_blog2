@@ -17,6 +17,7 @@ class SiteController {
     //     res.status(400).json({ error: "Error!!!" });
     //   };
     // });
+
     Course.find({})
       .then((courses) => {
         // courses = courses.map(course => course.toObject())
@@ -25,6 +26,8 @@ class SiteController {
         });
       })
       .catch((error) => next(error));
+
+    res.cookie('name', 'Ivan Pham')
   }
 
   //[GET]/search

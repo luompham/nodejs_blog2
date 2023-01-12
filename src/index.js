@@ -8,6 +8,12 @@ const { engine } = require('express-handlebars');
 const route = require('./routes/index');
 const db = require('./config/db');
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
+const flash = require('connect-flash');
+const passport = require('passport');
+const cors = require('cors')
+
 
 
 app.engine(
@@ -46,7 +52,9 @@ app.set('views', './src/resources/views');
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-app.use(morgan('combined'));
+app.use(cors());
+
+//app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -55,6 +63,23 @@ app.use(methodOverride('_method'));
 
 //Custom middleware
 app.use(SortMiddleware);
+
+//Cookies parser middleware
+app.use(cookieParser());
+
+//session 
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Router init
 route(app);

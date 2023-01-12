@@ -1,0 +1,56 @@
+<div class="mt-4">
+    <div class="container">
+        <div>
+            <h1>Users</h1>
+        </div>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th>No</th>
+                    <th scope="col">Tên
+                        {{{sortable 'name' _sort}}}
+                    </th>
+                    <th scope="col">Email
+                        {{{sortable 'level' _sort}}}
+                    </th>
+
+                    <th scope="col" colspan="2">Password
+                        {{{sortable 'createdAt' _sort}}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each user}}
+
+
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="courseIds[]" value="{{this._id}}">
+
+                        </div>
+                    </td>
+
+                    <th scope="row">{{sum @index 1}}</th>
+
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.password}}</td>
+                    <td>
+                        <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+
+                        <!-- Button trigger modal -->
+                        <a href="" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal"
+                            data-target="#delete-course-modal">Xóa</a>
+                    </td>
+                </tr>
+
+
+
+
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
